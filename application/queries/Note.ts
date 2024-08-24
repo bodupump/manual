@@ -1,4 +1,4 @@
-import { NoteTarget } from "../targets/note";
+import { NoteTarget } from "../targets/Note";
 import { BaseManyQuery } from "./BaseManyQuery";
 import { BaseOneQuery } from "./BaseOneQuerry";
 

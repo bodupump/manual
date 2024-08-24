@@ -11,3 +11,8 @@ export class Bar {
         this.foos = bar.foos;
     }
 }
+
+
+export interface CreateBarDto {
+    name : string;
+}

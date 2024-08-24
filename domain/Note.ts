@@ -9,3 +9,14 @@ export class Note {
         this.description = note.description;
     }
 }
+
+export interface CreateNoteDto {
+    text : string;
+    description : string;
+}
+
+export interface UpdateNoteDto {
+    id : string;
+    text : string;
+    description : string;
+}

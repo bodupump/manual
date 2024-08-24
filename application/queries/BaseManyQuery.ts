@@ -1,6 +1,6 @@
-import { BaseOneQuery } from "./BaseOneQuerry";
-
-export class BaseManyQuery<T> extends BaseOneQuery<T> {
+export class BaseManyQuery<T> {
+    target? : T;
+    value? : string;
     offset? : number;
     limit? : number;
 }

@@ -1,8 +1,10 @@
 import { Bar, CreateBarDto } from "../../../domain/Bar";
-import { BarQuery } from "../../queries/Bar";
+import { BarManyQuery, BarOneQuery } from "../../queries/Bar";
+import { BarRepositoryResponse } from "../../responces/Bar";
 
 export interface IBarRepository {
-    get(query? : BarQuery) : Promise<Bar[]>;
+    getMany (query? : BarManyQuery) : Promise<BarRepositoryResponse[]>;
+    getOne(query? : BarOneQuery) : Promise<Bar>;
     create(dto : CreateBarDto) : Promise<Bar>;
     update(bar : Bar) : Promise<void>;
     delete(id : string) : Promise<void>;

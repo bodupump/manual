@@ -1,6 +1,11 @@
 import { BarTarget } from "../targets/Bar";
-import { BaseQuery } from "./BaseQuery";
+import { BaseManyQuery } from "./BaseManyQuery";
+import { BaseOneQuery } from "./BaseOneQuerry";
 
-export class BarQuery extends BaseQuery<BarTarget> {
+export class BarManyQuery extends BaseManyQuery<BarTarget> {
+
+}
+
+export class BarOneQuery extends BaseOneQuery<BarTarget> {
 
 }

@@ -5,10 +5,10 @@ export class Bar {
     name : string;
     foos : Foo[];
 
-    constructor(bar : Bar ) {
-        this.id = bar.id;
-        this.name = bar.name;
-        this.foos = bar.foos;
+    constructor( id : string, name : string, foos : Foo[] ) {
+        this.id = id;
+        this.name = name;
+        this.foos = foos;
     }
 }
 

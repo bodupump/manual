@@ -3,7 +3,7 @@ import { FooManyQuery, FooOneQuery } from "../../queries/Foo";
 import { FooRepositoryResponse } from "../../responces/Foo";
 
 export interface IFooRepository {
-    getMany (query? : FooManyQuery) : Promise<FooRepositoryResponse[]>;
+    getMany (query? : FooManyQuery) : Promise<FooRepositoryResponse>;
     getOne(query? : FooOneQuery) : Promise<Foo>;
     create(dto : CreateFooDto) : Promise<Foo>;
 }

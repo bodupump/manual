@@ -88,5 +88,4 @@ export class BarRepository implements IBarRepository {
         }    
         BarRepository.repository.filter(bar => bar.id !== id);
     }
-
 }

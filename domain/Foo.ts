@@ -14,5 +14,5 @@ export class Foo {
 
 export interface CreateFooDto {
     name : string;
-    barId : string;
+    bar : Bar;
 }

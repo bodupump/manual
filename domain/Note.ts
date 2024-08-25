@@ -1,7 +1,7 @@
 export class Note {
-    id : string;
-    text : string;
-    description : string;
+    readonly id : string;
+    readonly text : string;
+    readonly description : string;
 
     constructor(id : string, text : string, description : string) {
         this.id = id;

@@ -6,4 +6,5 @@ export interface IFooRepository {
     getMany (query? : FooManyQuery) : Promise<FooRepositoryResponse>;
     getOne(query? : FooOneQuery) : Promise<Foo>;
     create(dto : CreateFooDto) : Promise<Foo>;
+    update (foo : Foo) : Promise<void>;
 }

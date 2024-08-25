@@ -4,12 +4,12 @@ import { FooManyQuery, FooOneQuery } from "../../../application/queries/Foo";
 import { FooRepositoryResponse } from "../../../application/responces/Foo";
 import { FooTarget } from "../../../application/targets/Foo";
 import { Foo, CreateFooDto } from "../../../domain/Foo";
-import { BarRepository } from "./Bar";
 
 
 
 
 export class FooRepository implements IFooRepository {
+    
 
     private static repository : Foo[] = [];
 
@@ -73,5 +73,12 @@ export class FooRepository implements IFooRepository {
         const bar = new Foo(v4(),dto.name, dto.bar);
         FooRepository.repository.push(bar);
         return bar;
+    }
+    async update(foo: Foo): Promise<void> {
+        const barIndex = FooRepository.repository.findIndex(f => f.id === foo.id);
+        if (!barIndex || barIndex == -1) {
+            throw new Error("404");
+        }
+        FooRepository.repository[barIndex] = foo;
     }
 }

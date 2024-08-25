@@ -1,9 +1,9 @@
 import { Bar } from "./Bar";
 
 export class Foo {
-    id : string;
-    name : string;
-    bar : Bar
+    readonly id : string;
+    readonly name : string;
+    readonly bar : Bar
 
     constructor(id : string, name : string, bar : Bar) {
         this.id = id;

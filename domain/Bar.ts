@@ -1,10 +1,10 @@
 import { Foo } from "./Foo";
 
 export class Bar {
-    id : string;
-    name : string;
-    foos : Foo[];
-    date : Date;
+    readonly id : string;
+    readonly name : string;
+    readonly foos : Foo[];
+    readonly date : Date;
 
     constructor( id : string, name : string, foos : Foo[], date : Date ) {
         this.id = id;

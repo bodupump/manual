@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package TrainingJournalPackage;
+
+message TLanguages {
+  string ru = 1;
+  string en = 2;
+  string de = 3;
+}
+
+message TPagination {
+  int32 perPage = 1;
+  int32 page = 2;
+  int32 pages = 3;
+}
+
+message Gear {
+  string id = 1;
+  string name = 2;
+}
+
+message GearI11n {
+  string id = 1;
+  TLanguages name = 2;
+}
+
+message Muscle {
+  string id = 1;
+  string name = 2;
+}
+
+message MuscleI11n {
+  string id = 1;
+  TLanguages name = 2;
+}
+
+message Exercise {
+  string id = 1;
+  string name = 2;
+  string photo = 3;
+  string video = 4;
+  string description = 5;
+  repeated Muscle muscles = 6;
+  repeated Gear gears = 7;
+}
+
+message ExerciseI11n {
+  string id = 1;
+  TLanguages name = 2;
+  string photo = 3;
+  string video = 4;
+  TLanguages description = 5;
+  repeated MuscleI11n muscles = 6;
+  repeated GearI11n gears = 7;
+}
+
+message ExerciseIdDto {
+  string id = 1;
+}

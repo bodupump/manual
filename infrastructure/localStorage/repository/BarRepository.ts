@@ -1,17 +1,28 @@
 import { v4 } from "uuid";
-import { IBarRepository } from "../../../application/interfaces/repository/iBar";
+import { IBarRepository } from "../../../application/interfaces/repository/IBarRepository";
 import { BarManyQuery, BarOneQuery } from "../../../application/queries/Bar";
 import { BarRepositoryResponse } from "../../../application/responces/Bar";
 import { BarTarget } from "../../../application/targets/Bar";
 import { Bar, CreateBarDto } from "../../../domain/Bar";
+import { AsyncLocalStorage } from 'node:async_hooks';
+import { ILogger } from '../../../application/interfaces/logger/ILogger';
 
 
 
 
 export class BarRepository implements IBarRepository {
-    
     private static repository : Bar[] = [];
-    
+
+    /**
+     *
+     */
+    constructor(
+        private readonly logger: ILogger,
+        private readonly asyncLocalStorage: AsyncLocalStorage<any>,
+    ) {
+        this.logger.setContext(BarRepository.name);
+    }
+
     async getMany(query?: BarManyQuery): Promise<BarRepositoryResponse> {
         let pagination = {
             limit : 25,

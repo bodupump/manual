@@ -1,6 +1,6 @@
 import { BarTarget } from "../targets/Bar";
 import { BaseManyQuery } from "./BaseManyQuery";
-import { BaseOneQuery } from "./BaseOneQuerry";
+import { BaseOneQuery } from "./BaseOneQuery";
 
 export class BarManyQuery extends BaseManyQuery<BarTarget> {
     includesPeriod? : {

@@ -1,6 +1,6 @@
 import { FooTarget } from "../targets/Foo";
 import { BaseManyQuery } from "./BaseManyQuery";
-import { BaseOneQuery } from "./BaseOneQuerry";
+import { BaseOneQuery } from "./BaseOneQuery";
 
 export class FooManyQuery extends BaseManyQuery<FooTarget> {
 

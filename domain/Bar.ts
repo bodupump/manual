@@ -18,3 +18,10 @@ export class Bar {
 export interface CreateBarDto {
     name : string;
 }
+
+export interface BarDto {
+    id : string;
+    name : string;
+    foos : Foo[];
+    date : Date;
+}

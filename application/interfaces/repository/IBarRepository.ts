@@ -9,3 +9,5 @@ export interface IBarRepository {
     update(bar : Bar) : Promise<void>;
     delete(id : string) : Promise<void>;
 }
+
+export const IBarRepository = Symbol('IBarRepository');

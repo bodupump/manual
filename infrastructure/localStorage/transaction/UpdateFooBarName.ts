@@ -1,5 +1,5 @@
-import { IBarRepository } from "../../../application/interfaces/repository/iBar";
-import { IFooRepository } from "../../../application/interfaces/repository/iFoo";
+import { IBarRepository } from "../../../application/interfaces/repository/IBarRepository";
+import { IFooRepository } from "../../../application/interfaces/repository/IFooRepository";
 import { IUpdateFooBarNameTransaction } from "../../../application/interfaces/transaction/IUpdateFooBarName";
 import { BarTarget } from "../../../application/targets/Bar";
 import { FooTarget } from "../../../application/targets/Foo";

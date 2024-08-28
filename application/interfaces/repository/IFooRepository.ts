@@ -8,3 +8,5 @@ export interface IFooRepository {
     create(dto : CreateFooDto) : Promise<Foo>;
     update (foo : Foo) : Promise<void>;
 }
+
+export const IFooRepository = Symbol('IFooRepository');

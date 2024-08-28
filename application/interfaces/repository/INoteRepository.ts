@@ -9,3 +9,5 @@ export interface INoteRepository {
     update(dto : UpdateNoteDto) : Promise<Note>;
     delete (id : string) : Promise<void>;
 }
+
+export const INoteRepository = Symbol('INoteRepository');

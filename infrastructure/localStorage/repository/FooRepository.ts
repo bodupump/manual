@@ -1,17 +1,24 @@
 import { v4 } from "uuid";
-import { IFooRepository } from "../../../application/interfaces/repository/iFoo";
+import { IFooRepository } from "../../../application/interfaces/repository/IFooRepository";
 import { FooManyQuery, FooOneQuery } from "../../../application/queries/Foo";
 import { FooRepositoryResponse } from "../../../application/responces/Foo";
 import { FooTarget } from "../../../application/targets/Foo";
 import { Foo, CreateFooDto } from "../../../domain/Foo";
-
-
-
+import { ILogger } from '../../../application/interfaces/logger/ILogger';
+import { AsyncLocalStorage } from 'node:async_hooks';
 
 export class FooRepository implements IFooRepository {
-    
-
     private static repository : Foo[] = [];
+
+    /**
+     *
+     */
+    constructor(
+        private readonly logger: ILogger,
+        private readonly asyncLocalStorage: AsyncLocalStorage<any>,
+    ) {
+        this.logger.setContext(FooRepository.name);
+    }
 
     async getMany(query?: FooManyQuery): Promise<FooRepositoryResponse> {
         let pagination = {

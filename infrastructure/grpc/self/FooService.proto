@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "common.proto";
+
+package TrainingJournalPackage;
+
+service MuscleService {
+  rpc getMuscle (GetMuscleRequest) returns (Muscle) {}
+  rpc getMuscleI11n (GetMuscleRequest) returns (MuscleI11n) {}
+  rpc findMuscles (FindMusclesRequest) returns (Muscles) {}
+  rpc findMusclesI11n (FindMusclesRequest) returns (MusclesI11n) {}
+  rpc createMuscleI11n (CreateMuscleRequest) returns (CreateMuscleResponse) {}
+  rpc deleteMuscle (DeleteMuscleRequest) returns (google.protobuf.Empty) {}
+  rpc updateMuscleI11n (UpdateMuscleRequest) returns (google.protobuf.Empty) {}
+}
+
+message GetMuscleRequest {
+  string id = 1;
+}
+
+message Muscles {
+  repeated Muscle muscles = 1;
+}
+
+message MusclesI11n {
+  repeated MuscleI11n gears = 1;
+}
+
+message CreateMuscleRequest {
+  MuscleCreateDto dto = 1;
+}
+
+message MuscleCreateDto {
+  optional string id = 1;
+  TLanguages name = 2;
+}
+
+message UpdateMuscleRequest {
+  UpdateMuscleDto dto = 1;
+}
+
+message UpdateMuscleDto {
+  string id = 1;
+  TLanguages name = 2;
+}
+
+message DeleteMuscleRequest {
+  string id = 1;
+}
+
+message DeleteMuscleDto {
+  string id = 1;
+}
+
+message CreateMuscleResponse {
+  string id = 1;
+}
+
+message FindMusclesRequest {
+  TMuscleFilter filter = 1;
+  TPagination pagination = 2;
+}
+
+message TMuscleFilter {
+  string name = 1;
+}

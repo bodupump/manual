@@ -8,7 +8,7 @@ import { ILogger } from '../../../application/interfaces/logger/ILogger';
 import { firstValueFrom } from 'rxjs';
 import { Metadata } from '@grpc/grpc-js';
 import { v4 as uuid } from 'uuid';
-import { IFooService } from '../../../application/interfaces/services/microservice_01/foo/IFooService';
+import { IFooService } from '../../../application/interfaces/services/microservice_01/IFooService';
 import { BarDto } from '../../../domain/Bar';
 import { NoteService } from '../../../application/services/NoteService';
 

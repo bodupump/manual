@@ -1,4 +1,4 @@
-import { Foo } from "./Foo";
+import { Foo, FooDto } from "./Foo";
 
 export class Bar {
     readonly id : string;
@@ -12,6 +12,15 @@ export class Bar {
         this.foos = foos;
         this.date = date;
     }
+
+    toDto(): BarDto {
+        return {
+            id: this.id,
+            name: this.name,
+            foos: this.foos.map((foo) => foo.toDto()),
+            date: this.date.toISOString(),
+        };
+    }
 }
 
 
@@ -22,6 +31,6 @@ export interface CreateBarDto {
 export interface BarDto {
     id : string;
     name : string;
-    foos : Foo[];
-    date : Date;
+    foos : FooDto[];
+    date : string;
 }

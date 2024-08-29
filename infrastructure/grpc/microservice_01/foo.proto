@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "common.proto";
+
+package Microservice01Package;
+
+service FooService {
+    rpc getFoo (GetFooRequest) returns (GetFooResponse) {}
+}
+
+message GetFooRequest {
+    string barId = 1;
+}
+
+message GetFooResponse {
+    Foo foo = 1;
+}

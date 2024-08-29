@@ -11,11 +11,8 @@ export const config = {
         self: {
             url: process.env.GRPC_URL ?? 'localhost:50050',
         },
-        training_journal: {
-            url: process.env.TRAINING_JOURNAL_GRPC_URL ?? 'localhost:50050',
-        },
-        food_journal: {
-            url: process.env.FOOD_JOURNAL_GRPC_URL ?? 'localhost:50050',
+        microservice_01: {
+            url: process.env.MICROSERVICE_01_GRPC_URL ?? 'localhost:50050',
         },
     },
 

@@ -10,6 +10,8 @@ import { LoggingGrpcInterceptor } from '../interceptors/LoggingGrpcInterceptor';
 import { GrpcMethod } from '@nestjs/microservices';
 import { IBarRepository } from '../../../application/interfaces/repository/IBarRepository';
 import { BarDto } from '../../../domain/Bar';
+import { GetBarRequest } from '../../../application/interfaces/services/microservice_01/bar/GetBarRequest';
+import { BarTarget } from '../../../application/targets/Bar';
 
 @Controller()
 @UseFilters(GrpcExceptionFilter)
@@ -29,9 +31,11 @@ export class BarController {
     @GrpcMethod('BarService', 'getBar')
     @AsyncLocalStorageDecorator()
     async getBar(req: GetBarRequest): Promise<BarDto> {
-        // console.log('metadata', metadata);
         const { id } = req;
-        const bar = await this.barRepository.get(id);
+        const bar = await this.barRepository.getOne({
+            target: BarTarget.id,
+            value: id,
+        });
         return bar.toDto();
     }
 }

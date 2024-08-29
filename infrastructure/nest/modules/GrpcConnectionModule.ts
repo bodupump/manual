@@ -1,46 +1,35 @@
 import { Module } from '@nestjs/common';
 import { join } from 'node:path';
 import { ClientGrpc, ClientsModule, Transport } from '@nestjs/microservices';
-import { config } from '@config/config';
-import { IGearService } from '@app/interfaces/services/training_journal/IGearService';
-import { IMuscleService } from '@app/interfaces/services/training_journal/IMuscleService';
-import { IExerciseService } from '@app/interfaces/services/training_journal/IExerciseService';
-import { IExerciseSetService } from '@app/interfaces/services/training_journal/IExerciseSetService';
+import { IFooService } from '../../../application/interfaces/services/microservice_01/IFooService';
+import { IBarService } from '../../../application/interfaces/services/microservice_01/IBarService';
+import { config } from '../../../config/config';
 
-const GRPC_URL_TRAINING_JOURNAL = config.grpc.training_journal.url;
-// const GRPC_URL_FOOD_JOURNAL = config.grpc.food_journal.url;
+const GRPC_URL_MICROSERVICE_01 = config.grpc.microservice_01.url;
 
 @Module({
     imports: [
         ClientsModule.register([
             {
-                name: 'GRPC_TRAINING_JOURNAL_CLIENT',
+                name: 'GRPC_MICROSERVICE_01_CLIENT',
                 transport: Transport.GRPC,
                 options: {
-                    url: GRPC_URL_TRAINING_JOURNAL,
-                    package: ['TrainingJournalPackage'],
+                    url: GRPC_URL_MICROSERVICE_01,
+                    package: ['Microservice01Package'],
                     protoPath: [
                         join(
                             __dirname,
-                            '../../grpc/training_journal/GearService.proto',
+                            '../../grpc/microservice_01/foo.proto',
                         ),
                         join(
                             __dirname,
-                            '../../grpc/training_journal/MuscleService.proto',
-                        ),
-                        join(
-                            __dirname,
-                            '../../grpc/training_journal/ExerciseService.proto',
-                        ),
-                        join(
-                            __dirname,
-                            '../../grpc/training_journal/ExerciseSetService.proto',
+                            '../../grpc/microservice_01/bar.proto',
                         ),
                     ],
                     loader: {
                         keepCase: true,
                         includeDirs: [
-                            join(__dirname, '../../grpc/training_journal'),
+                            join(__dirname, '../../grpc/microservice_01'),
                         ],
                     },
                 },
@@ -49,41 +38,23 @@ const GRPC_URL_TRAINING_JOURNAL = config.grpc.training_journal.url;
     ],
     providers: [
         {
-            provide: IGearService,
-            useFactory: (client: ClientGrpc): IGearService => {
-                return client.getService<IGearService>('GearService');
+            provide: IFooService,
+            useFactory: (client: ClientGrpc): IFooService => {
+                return client.getService<IFooService>('FooService');
             },
-            inject: ['GRPC_TRAINING_JOURNAL_CLIENT'],
+            inject: ['GRPC_MICROSERVICE_01_CLIENT'],
         },
         {
-            provide: IMuscleService,
-            useFactory: (client: ClientGrpc): IMuscleService => {
-                return client.getService<IMuscleService>('MuscleService');
+            provide: IBarService,
+            useFactory: (client: ClientGrpc): IBarService => {
+                return client.getService<IBarService>('BarService');
             },
-            inject: ['GRPC_TRAINING_JOURNAL_CLIENT'],
-        },
-        {
-            provide: IExerciseService,
-            useFactory: (client: ClientGrpc): IExerciseService => {
-                return client.getService<IExerciseService>('ExerciseService');
-            },
-            inject: ['GRPC_TRAINING_JOURNAL_CLIENT'],
-        },
-        {
-            provide: IExerciseSetService,
-            useFactory: (client: ClientGrpc): IExerciseSetService => {
-                return client.getService<IExerciseSetService>(
-                    'ExerciseSetService',
-                );
-            },
-            inject: ['GRPC_TRAINING_JOURNAL_CLIENT'],
+            inject: ['GRPC_MICROSERVICE_01_CLIENT'],
         },
     ],
     exports: [
-        IGearService,
-        IMuscleService,
-        IExerciseService,
-        IExerciseSetService,
+        IFooService,
+        IBarService,
     ],
 })
 export class GrpcConnectionModule {}

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package Microservice01Package;
+
+message Bar {
+  string id = 1;
+  string name = 2;
+  repeated Foo foos = 3;
+  string date = 4;
+}
+
+message Foo {
+  string id = 1;
+  string name = 2;
+  repeated Bar bar = 3;
+}
+
+message TPagination {
+  int32 perPage = 1;
+  int32 page = 2;
+  int32 pages = 3;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "common.proto";
+
+package Microservice01Package;
+
+service BarService {
+    rpc getBar (GetBarRequest) returns (GetBarResponse) {}
+}
+
+message GetBarRequest {
+    string barId = 1;
+}
+
+message GetBarResponse {
+    Bar bar = 1;
+}

@@ -12,25 +12,22 @@ import { AsyncLocalStorageModule } from './AsyncLocalStorageModule';
 import { LoggerModule } from './LoggerModule';
 import { ModeratorMiddleware } from '../middlewares/ModeratorMiddleware';
 import { FooController } from '../controllers/FooController';
+import { IFooRepository } from '../../../application/interfaces/repository/IFooRepository';
+import { IBarRepository } from '../../../application/interfaces/repository/IBarRepository';
 
 @Module({
     imports: [LoggerModule, GrpcConnectionModule, AsyncLocalStorageModule],
-    controllers: [
-        HealthCheckController,
-        FooController,
-    ],
+    controllers: [HealthCheckController, FooController],
     providers: [
         {
             provide: NoteService,
-            useFactory: () =>
-                // appRepository: IAppRepository,
-                // userWalletService: IUserWalletService,
-                {
-                    return new NoteService(/*appRepository, userWalletService */);
-                },
-            inject: [
-                /*IAppRepository, IUserWalletService*/
-            ],
+            useFactory: (
+                fooRepository: IFooRepository,
+                barRepository: IBarRepository,
+            ) => {
+                return new NoteService(fooRepository, barRepository);
+            },
+            inject: [IFooRepository, IBarRepository],
         },
     ],
 })

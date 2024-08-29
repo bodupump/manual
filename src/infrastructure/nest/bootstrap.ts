@@ -52,7 +52,7 @@ export async function bootstrap() {
         transport: Transport.GRPC,
         options: {
             url: GRPC_URL,
-            package: 'TrainingJournalPackage',
+            package: 'SelfPackage',
             protoPath: [
                 join(
                     __dirname,

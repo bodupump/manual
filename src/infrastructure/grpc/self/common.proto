@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package SelfPackage;
+
+message TPagination {
+  int32 perPage = 1;
+  int32 page = 2;
+  int32 pages = 3;
+}

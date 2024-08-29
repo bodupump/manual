@@ -19,11 +19,11 @@ const GRPC_URL_MICROSERVICE_01 = config.grpc.microservice_01.url;
                     protoPath: [
                         join(
                             __dirname,
-                            '../../grpc/microservice_01/foo.proto',
+                            '../../grpc/microservice_01/FooService.proto',
                         ),
                         join(
                             __dirname,
-                            '../../grpc/microservice_01/bar.proto',
+                            '../../grpc/microservice_01/BarService.proto',
                         ),
                     ],
                     loader: {

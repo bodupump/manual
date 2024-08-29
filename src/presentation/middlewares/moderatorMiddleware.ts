@@ -1,10 +1,9 @@
 import { NextFunction, Response } from 'express';
-import { IExtendRequest } from '@presentation/middlewares/IExtendRequest';
-import { config } from '@config/config';
-import { ForbiddenException } from '@app/exceptions/ForbiddenException';
-import { UnauthorizedException } from '@app/exceptions/UnauthorizedException';
+import { IExtendRequest } from './IExtendRequest';
+import { ForbiddenException } from '../../application/exceptions/ForbiddenException';
+import { UnauthorizedException } from '../../application/exceptions/UnauthorizedException';
 
-const MODERATOR_CHAT_IDS = config.moderatorChatIds;
+const MODERATOR_CHAT_IDS: string[] = [];
 
 export const moderatorMiddleware = (
     req: IExtendRequest,

@@ -1,5 +1,5 @@
-import { Exception } from '@app/exceptions/Exception';
-import { EStatus } from '@app/exceptions/EStatus';
+import { Exception } from './Exception';
+import { EStatus } from './EStatus';
 
 export class NotFoundException extends Exception {
     readonly status: number = EStatus.NOT_FOUND;

@@ -1,4 +1,4 @@
-import { EStatus } from '@app/exceptions/EStatus';
+import { EStatus } from './EStatus';
 
 /**
  *

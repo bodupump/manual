@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { AsyncLocalStorageSingleton } from '@utils/AsyncLocalStorageSingleton';
+import { AsyncLocalStorageSingleton } from '../../../utils/AsyncLocalStorageSingleton';
 
 @Global()
 @Module({

@@ -1,8 +1,8 @@
 import CryptoJS from 'crypto-js';
 import { NextFunction, Response } from 'express';
-import { config } from '@config/config';
-import { IExtendRequest } from '@presentation/middlewares/IExtendRequest';
-import { UnauthorizedException } from '@app/exceptions/UnauthorizedException';
+import { IExtendRequest } from './IExtendRequest';
+import { UnauthorizedException } from '../../application/exceptions/UnauthorizedException';
+import { config } from '../../config/config';
 
 export const authMiddleware = (
     req: IExtendRequest,

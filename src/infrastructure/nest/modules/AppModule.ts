@@ -8,16 +8,22 @@ import { NoteService } from '../../../application/services/NoteService';
 import { HealthCheckController } from '../controllers/HealthCheckController';
 import { GrpcConnectionModule } from './GrpcConnectionModule';
 import { AsyncLocalStorageModule } from './AsyncLocalStorageModule';
-// import { AuthMiddleware } from '@infrastructure/nest/middlewares/AuthMiddleware';
 import { LoggerModule } from './LoggerModule';
 import { ModeratorMiddleware } from '../middlewares/ModeratorMiddleware';
 import { FooController } from '../controllers/FooController';
 import { IFooRepository } from '../../../application/interfaces/repository/IFooRepository';
 import { IBarRepository } from '../../../application/interfaces/repository/IBarRepository';
+import { BarController } from '../controllers/BarController';
+import { RepositoriesModule } from './RepositoriesModule';
 
 @Module({
-    imports: [LoggerModule, GrpcConnectionModule, AsyncLocalStorageModule],
-    controllers: [HealthCheckController, FooController],
+    imports: [
+        LoggerModule,
+        GrpcConnectionModule,
+        AsyncLocalStorageModule,
+        RepositoriesModule,
+    ],
+    controllers: [HealthCheckController, FooController, BarController],
     providers: [
         {
             provide: NoteService,

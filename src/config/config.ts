@@ -7,6 +7,11 @@ export const config = {
         stage: process.env.STAGE ?? 'test',
     },
 
+    bot : {
+        bot_token: process.env.BOT_TOKEN,
+        // bot_url: process.env.BOT_URL,
+    },
+
     grpc: {
         self: {
             url: process.env.GRPC_URL ?? 'localhost:50050',

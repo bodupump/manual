@@ -9,8 +9,8 @@ import { firstValueFrom } from 'rxjs';
 import { Metadata } from '@grpc/grpc-js';
 import { v4 as uuid } from 'uuid';
 import { IFooService } from '../../../application/interfaces/services/microservice_01/IFooService';
-import { BarDto } from '../../../domain/Bar';
 import { NoteService } from '../../../application/services/NoteService';
+import { FooDto } from '../../../domain/Foo';
 
 const TIMEOUT_MS = 1000;
 
@@ -30,7 +30,7 @@ export class FooController {
     @Get('bar/:barId')
     public async getBar(
         @Param() { barId }: { barId: string },
-    ): Promise<BarDto> {
+    ): Promise<FooDto> {
         const meta = new Metadata();
         const traceId = uuid();
         meta.set('traceId', traceId);
@@ -39,9 +39,9 @@ export class FooController {
         const req = {
             id: barId,
         };
-        const barDto = await firstValueFrom(
+        const fooDto = await firstValueFrom(
             this.fooService.getFoo(req, meta, { deadline }),
         );
-        return barDto;
+        return fooDto;
     }
 }

@@ -1,7 +1,7 @@
-import { EGrpcStatusCode } from '@infrastructure/grpc/EGrpcStatusCode';
+import { EGrpcStatusCode } from '../infrastructure/grpc/EGrpcStatusCode';
 import { RpcException } from '@nestjs/microservices';
-import { ILogger } from '@app/interfaces/logger/ILogger';
-import { LoggerPino } from '@infrastructure/logger_pino/LoggerPino';
+import { ILogger } from '../application/interfaces/logger/ILogger';
+import { LoggerPino } from '../infrastructure/logger_pino/LoggerPino';
 
 export function GrpcExceptionDecorator(): MethodDecorator {
     return function gRpcExceptionDescriptor(

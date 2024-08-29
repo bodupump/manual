@@ -56,13 +56,13 @@ export async function bootstrap() {
             protoPath: [
                 join(
                     __dirname,
-                    '../../infrastructure/grpc/self/FooService.proto',
+                    '../grpc/self/FooService.proto',
                 ),
             ],
             loader: {
                 keepCase: true,
                 includeDirs: [
-                    join(__dirname, '../../infrastructure/grpc/self'),
+                    join(__dirname, '../grpc/self'),
                 ],
             },
             onLoadPackageDefinition: (pkg: any, server: any): void => {

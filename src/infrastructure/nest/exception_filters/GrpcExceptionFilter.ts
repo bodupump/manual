@@ -1,10 +1,10 @@
 import { Catch, RpcExceptionFilter } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { Observable, throwError } from 'rxjs';
-import { ILogger } from '@app/interfaces/logger/ILogger';
-import { LoggerPino } from '@infrastructure/logger_pino/LoggerPino';
-import { EGrpcStatusCode } from '@infrastructure/grpc/EGrpcStatusCode';
-import { Exception } from '@app/exceptions/Exception';
+import { ILogger } from '../../../application/interfaces/logger/ILogger';
+import { LoggerPino } from '../../logger_pino/LoggerPino';
+import { EGrpcStatusCode } from '../../grpc/EGrpcStatusCode';
+import { Exception } from '../../../application/exceptions/Exception';
 
 @Catch(Error)
 export class GrpcExceptionFilter implements RpcExceptionFilter<Error> {

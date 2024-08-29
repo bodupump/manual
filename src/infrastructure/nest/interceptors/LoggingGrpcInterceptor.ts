@@ -6,7 +6,7 @@ import {
     Inject,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { ILogger } from '@app/interfaces/logger/ILogger';
+import { ILogger } from '../../../application/interfaces/logger/ILogger';
 import { Metadata } from '@grpc/grpc-js';
 
 @Injectable()

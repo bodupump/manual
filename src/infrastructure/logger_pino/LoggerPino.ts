@@ -1,7 +1,7 @@
 import { pino } from 'pino';
-import { ILogger } from '@app/interfaces/logger/ILogger';
-import { loggerConfig } from '@config/loggerConfig';
-import { ELoggerLevel } from '@app/interfaces/logger/ELoggerLevel';
+import { ILogger } from '../../application/interfaces/logger/ILogger';
+import { loggerConfig } from '../../config/loggerConfig';
+import { ELoggerLevel } from '../../application/interfaces/logger/ELoggerLevel';
 
 const pinoLevelNumbers = {
     [ELoggerLevel.TRACE]: 10,

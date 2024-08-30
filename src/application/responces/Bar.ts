@@ -9,15 +9,15 @@ export class BarRepositoryResponse {
 
     constructor(
         totalCount : number,
-        totalPageCount : number,
         page : number,
         perPage : number,
         bars : Bar[]
     ) {
         this.totalCount = totalCount;
-        this.totalPageCount = totalPageCount;
-        this.page = page;
         this.perPage = perPage;
         this.bars = bars;
+        this.totalPageCount = Math.ceil(this.totalCount / this.perPage);
+        this.page = page;
+
     }
 }

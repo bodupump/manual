@@ -93,4 +93,16 @@ describe('IBarRepository', () => {
             }
         });
     });
+
+    describe('findByNameLike', () => {
+        it('01', async () => {
+            try {
+                const res = await barRepository.findByNameLike({ filter: { name: '02' } });
+                console.log(res);
+            } catch (e) {
+                logger.error(e, { e });
+                throw e;
+            }
+        });
+    });
 });

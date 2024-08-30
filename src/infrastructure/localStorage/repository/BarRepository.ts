@@ -7,6 +7,9 @@ import { Bar, CreateBarDto } from '../../../domain/Bar';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { ILogger } from '../../../application/interfaces/logger/ILogger';
 import { NotFoundException } from '../../../application/exceptions/NotFoundException';
+import { TPagination } from '../../../utils/TPagination';
+
+const LIMIT_ENTITY_PER_PAGE = 25;
 
 export class BarRepository implements IBarRepository {
     private static repository: Bar[] = [];
@@ -60,7 +63,6 @@ export class BarRepository implements IBarRepository {
         }
         return new BarRepositoryResponse(
             BarRepositoryResponse.length,
-            BarRepositoryResponse.length / pagination.limit,
             pagination.page,
             pagination.limit,
             bars,
@@ -78,6 +80,32 @@ export class BarRepository implements IBarRepository {
             throw new NotFoundException('404');
         }
         throw new NotFoundException('404');
+    }
+
+    async findByNameLike({
+        filter,
+        pagination,
+    }: {
+        filter: { name: string };
+        pagination?: TPagination;
+}): Promise<BarRepositoryResponse> {
+        const { name } = filter;
+        const { page = 1, perPage = LIMIT_ENTITY_PER_PAGE } = pagination ?? {};
+        const offset = perPage * (page - 1);
+
+        const allBars = BarRepository.repository
+            .filter((b) => b.name.includes(name));
+        const totalCount = allBars.length;
+        const bars = allBars
+            .slice(offset)
+            .slice(0, perPage);
+
+        return new BarRepositoryResponse(
+            totalCount,
+            page,
+            perPage,
+            bars,
+        );
     }
 
     async create(dto: CreateBarDto): Promise<Bar> {

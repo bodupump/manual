@@ -1,12 +1,12 @@
-import { Foo, FooDto } from "./Foo";
+import { Foo, FooDto } from './Foo';
 
 export class Bar {
-    readonly id : string;
-    readonly name : string;
-    readonly foos : Foo[];
-    readonly date : Date;
+    readonly id: string;
+    readonly name: string;
+    readonly foos: Foo[];
+    readonly date: Date;
 
-    constructor( id : string, name : string, foos : Foo[], date : Date ) {
+    constructor(id: string, name: string, foos: Foo[], date: Date) {
         this.id = id;
         this.name = name;
         this.foos = foos;
@@ -23,15 +23,14 @@ export class Bar {
     }
 }
 
-
 export interface CreateBarDto {
-    id : string;
-    name : string;
+    id?: string;
+    name: string;
 }
 
 export interface BarDto {
-    id : string;
-    name : string;
-    foos : FooDto[];
-    date : string;
+    id: string;
+    name: string;
+    foos: FooDto[];
+    date: string;
 }

@@ -21,7 +21,7 @@ export class FooController {
         @Inject(NoteService) private readonly noteService: NoteService,
         @Inject(IFooService) private readonly fooService: IFooService,
     ) {
-        this.logger.setContext('MuscleController');
+        this.logger.setContext('FooController');
     }
 
     /**

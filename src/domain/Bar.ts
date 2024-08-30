@@ -25,6 +25,7 @@ export class Bar {
 
 
 export interface CreateBarDto {
+    id : string;
     name : string;
 }
 

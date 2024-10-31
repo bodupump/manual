@@ -15,7 +15,7 @@ import { IFooRepository } from '../../../application/interfaces/repository/IFooR
 import { IBarRepository } from '../../../application/interfaces/repository/IBarRepository';
 import { BarController } from '../controllers/BarController';
 import { RepositoriesModule } from './RepositoriesModule';
-import { RpcHttpController } from '../controllers/RpcHttpController';
+import { RpcController } from '../controllers/RpcController';
 import { RpcClientModule } from './RpcClientModule';
 
 @Module({
@@ -26,7 +26,7 @@ import { RpcClientModule } from './RpcClientModule';
         RepositoriesModule,
         RpcClientModule,
     ],
-    controllers: [HealthCheckController, FooController, BarController, RpcHttpController],
+    controllers: [HealthCheckController, FooController, BarController, RpcController],
     providers: [
         {
             provide: NoteService,

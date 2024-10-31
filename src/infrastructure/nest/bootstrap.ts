@@ -10,6 +10,7 @@ import { INestApplication, RequestMethod } from '@nestjs/common';
 import { Transport } from '@nestjs/microservices';
 import { join } from 'node:path';
 import { ReflectionService } from '@grpc/reflection';
+import { RpcHttpServer } from './transporters/RpcHttpServer';
 
 const logger: ILogger = new LoggerPino({
     level: ELoggerLevel.TRACE,
@@ -69,6 +70,9 @@ export async function bootstrap() {
                 new ReflectionService(pkg).addToServer(server);
             },
         },
+    });
+    app.connectMicroservice({
+        strategy: new RpcHttpServer(),
     });
     await app.startAllMicroservices();
 

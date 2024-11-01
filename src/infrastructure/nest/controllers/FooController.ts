@@ -66,7 +66,7 @@ export class FooController {
     public async testRpcHttp2(
         @Body() body: object,
     ): Promise<any> {
-        const res = await this.rpcClient.send('echo2', body);
+        const res = await this.rpcClient.exec('echo2', body);
         return res;
     }
 }

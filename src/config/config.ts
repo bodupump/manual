@@ -3,7 +3,7 @@ dotenv.config();
 
 export const config = {
     app: {
-        port: Number(process.env.PORT) ?? 80,
+        port: Number(process.env.PORT ?? 80),
         stage: process.env.STAGE ?? 'test',
     },
 
@@ -34,4 +34,12 @@ export const config = {
     },
 
     limitEntityPerPage: Number(process.env.LIMIT_ENTITY_PER_PAGE ?? 100),
+
+    rpcHttpServer: {
+        port: Number(process.env.RPC_HTTP_SERVER_PORT ?? 3333),
+    },
+
+    rpcHttpClient: {
+        url: process.env.RPC_HTTP_CLIENT_URL ?? 'http://localhost:3333',
+    },
 };

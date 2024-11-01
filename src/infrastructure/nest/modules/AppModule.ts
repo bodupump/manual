@@ -15,6 +15,8 @@ import { IFooRepository } from '../../../application/interfaces/repository/IFooR
 import { IBarRepository } from '../../../application/interfaces/repository/IBarRepository';
 import { BarController } from '../controllers/BarController';
 import { RepositoriesModule } from './RepositoriesModule';
+import { RpcController } from '../controllers/RpcController';
+import { RpcClientModule } from './RpcClientModule';
 
 @Module({
     imports: [
@@ -22,8 +24,9 @@ import { RepositoriesModule } from './RepositoriesModule';
         GrpcConnectionModule,
         AsyncLocalStorageModule,
         RepositoriesModule,
+        RpcClientModule,
     ],
-    controllers: [HealthCheckController, FooController, BarController],
+    controllers: [HealthCheckController, FooController, BarController, RpcController],
     providers: [
         {
             provide: NoteService,

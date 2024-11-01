@@ -1,7 +1,8 @@
-import { pino } from 'pino';
+import { ELoggerLevel } from '../../application/interfaces/logger/ELoggerLevel';
+import { Exception } from '../../application/exceptions/Exception';
 import { ILogger } from '../../application/interfaces/logger/ILogger';
 import { loggerConfig } from '../../config/loggerConfig';
-import { ELoggerLevel } from '../../application/interfaces/logger/ELoggerLevel';
+import { pino } from 'pino';
 
 const pinoLevelNumbers = {
     [ELoggerLevel.TRACE]: 10,
@@ -91,7 +92,10 @@ export class LoggerPino implements ILogger {
 
         let message;
         let stack;
-        if (messageOrError instanceof Error) {
+        if (messageOrError instanceof Exception) {
+            message = messageOrError.message;
+            stack = messageOrError.stack?.split(/\s{2,}/);
+        } else if (messageOrError instanceof Error) {
             const error = messageOrError;
             message = error.message;
             stack = error.stack?.split(/\s{2,}/);
@@ -101,7 +105,9 @@ export class LoggerPino implements ILogger {
 
         let context = '';
         let payload;
-        if (typeof contextOrPayload === 'string') {
+        if (messageOrError instanceof Exception) {
+            payload = messageOrError.payload;
+        } else if (typeof contextOrPayload === 'string') {
             context = contextOrPayload;
             payload = _payload;
         } else if (typeof contextOrPayload === 'object') {
@@ -109,7 +115,9 @@ export class LoggerPino implements ILogger {
         }
 
         let totalContext;
-        if (this.context && context) {
+        if (messageOrError instanceof Exception) {
+            totalContext = messageOrError.context;
+        } else if (this.context && context) {
             totalContext = `${this.context}.${context}`;
         } else if (this.context) {
             totalContext = this.context;

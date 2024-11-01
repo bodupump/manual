@@ -6,10 +6,11 @@ import { InternalServerErrorException } from '../../../application/exceptions/In
 import { LoggerPino } from '../../logger_pino/LoggerPino';
 import { config } from '../../../config/config';
 import { firstValueFrom } from 'rxjs';
+import { IRpcClient } from '../../../application/interfaces/clients/IRpcClient';
 
 const URL = config.rpcHttpClient.url;
 
-export class RpcHttpClient extends ClientProxy {
+export class RpcHttpClient extends ClientProxy implements IRpcClient {
     private readonly logger: ILogger;
 
     /**

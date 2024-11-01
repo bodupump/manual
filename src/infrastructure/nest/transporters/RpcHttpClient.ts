@@ -2,11 +2,11 @@ import axios from 'axios';
 import { ClientProxy, ReadPacket, WritePacket } from '@nestjs/microservices';
 import { Exception } from '../../../application/exceptions/Exception';
 import { ILogger } from '../../../application/interfaces/logger/ILogger';
+import { IRpcClient } from '../../../application/interfaces/clients/IRpcClient';
 import { InternalServerErrorException } from '../../../application/exceptions/InternalServerErrorException';
 import { LoggerPino } from '../../logger_pino/LoggerPino';
 import { config } from '../../../config/config';
 import { firstValueFrom } from 'rxjs';
-import { IRpcClient } from '../../../application/interfaces/clients/IRpcClient';
 
 const URL = config.rpcHttpClient.url;
 

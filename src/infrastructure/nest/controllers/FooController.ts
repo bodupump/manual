@@ -58,4 +58,15 @@ export class FooController {
         const res = await this.rpcClient.exec('echo', body);
         return res;
     }
+
+    /**
+     *
+     */
+    @Post('/testRpcHttp2')
+    public async testRpcHttp2(
+        @Body() body: object,
+    ): Promise<any> {
+        const res = await this.rpcClient.send('echo2', body);
+        return res;
+    }
 }

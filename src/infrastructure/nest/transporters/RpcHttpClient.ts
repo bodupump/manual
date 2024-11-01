@@ -1,11 +1,25 @@
-import { ClientProxy, ReadPacket, WritePacket } from '@nestjs/microservices';
 import axios from 'axios';
-import { firstValueFrom } from 'rxjs';
+import { ClientProxy, ReadPacket, WritePacket } from '@nestjs/microservices';
+import { Exception } from '../../../application/exceptions/Exception';
+import { ILogger } from '../../../application/interfaces/logger/ILogger';
+import { InternalServerErrorException } from '../../../application/exceptions/InternalServerErrorException';
+import { LoggerPino } from '../../logger_pino/LoggerPino';
 import { config } from '../../../config/config';
+import { firstValueFrom } from 'rxjs';
 
 const URL = config.rpcHttpClient.url;
 
 export class RpcHttpClient extends ClientProxy {
+    private readonly logger: ILogger;
+
+    /**
+     *
+     */
+    constructor() {
+        super();
+        this.logger = new LoggerPino();
+    }
+
     /**
      *
      */
@@ -46,13 +60,15 @@ export class RpcHttpClient extends ClientProxy {
             url: `${URL}/rpc/${method}`,
             data,
         }).then(responce => {
-            if (responce.status === 200) {
-                callback({ response: responce.data });
-            } else {
-                //
-            }
+            callback({ response: responce.data });
         }).catch(e => {
-            //
+            if (e.response) {
+                callback({ err: new InternalServerErrorException('Внутренняя ошибка сервера', 'RpcHttpClient.publish', e.response.data) });
+            } else if (e.request) {
+                callback({ err: new InternalServerErrorException('The request was made but no response was received', 'RpcHttpClient.publish', e.request) });
+            } else {
+                callback({ err: new Exception('Something happened in setting up the request that triggered an Error', 'RpcHttpClient.publish', e.message) });
+            }
         });
 
         return () => console.log('RpcHttpClient teardown');

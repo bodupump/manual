@@ -3,7 +3,7 @@ import {
     Controller,
     Get,
     Inject,
-    Param, Post,
+    Param, Post, Req,
 } from '@nestjs/common';
 import { ILogger } from '../../../application/interfaces/logger/ILogger';
 import { firstValueFrom } from 'rxjs';
@@ -13,6 +13,7 @@ import { IFooService } from '../../../application/interfaces/services/microservi
 import { NoteService } from '../../../application/services/NoteService';
 import { FooDto } from '../../../domain/Foo';
 import { IRpcClient } from '../../../application/interfaces/clients/IRpcClient';
+import { IExtendRequest } from '../../../presentation/middlewares/IExtendRequest';
 
 const TIMEOUT_MS = 1000;
 
@@ -54,8 +55,11 @@ export class FooController {
     @Post('/testRpcHttp')
     public async testRpcHttp(
         @Body() body: object,
+        @Req() req: IExtendRequest,
     ): Promise<any> {
-        const res = await this.rpcClient.exec('echo', body);
+        const chatId = req.account?.chatId;
+        const traceId = uuid();
+        const res = await this.rpcClient.exec('echo', body, { chatId, traceId });
         return res;
     }
 
@@ -65,8 +69,11 @@ export class FooController {
     @Post('/testRpcHttp2')
     public async testRpcHttp2(
         @Body() body: object,
+        @Req() req: IExtendRequest,
     ): Promise<any> {
-        const res = await this.rpcClient.exec('echo2', body);
+        const chatId = req.account?.chatId;
+        const traceId = uuid();
+        const res = await this.rpcClient.exec('echo2', body, { chatId, traceId });
         return res;
     }
 }

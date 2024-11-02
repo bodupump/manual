@@ -37,7 +37,11 @@ export class RpcHttpServer extends Server implements CustomTransportStrategy {
                 if (!handler) {
                     throw new MethodNotAllowedException('Метод не поддерживается', 'RpcHttpServer.listen', { method });
                 }
-                const result = await handler(req.body);
+                const meta = {
+                    chatId: req.get('X-Chat-Id'),
+                    traceId: req.get('X-Trace-Id'),
+                };
+                const result = await handler(req.body, meta);
                 res.status(200).json(result);
             } catch(e) {
                 next(e);

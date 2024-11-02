@@ -1,3 +1,5 @@
+import { TUuid } from '../../../utils/TUuid';
+
 export interface IRpcClient {
     exec<
         TResult = object,
@@ -5,6 +7,10 @@ export interface IRpcClient {
     >(
         method: string,
         data: TInput,
+        meta?: {
+            chatId?: string,
+            traceId?: TUuid,
+        },
     ): Promise<TResult>;
 }
 

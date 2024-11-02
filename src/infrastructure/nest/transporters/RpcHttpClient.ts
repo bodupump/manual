@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ClientProxy, ReadPacket, WritePacket } from '@nestjs/microservices';
 import { Exception } from '../../../application/exceptions/Exception';
 import { ILogger } from '../../../application/interfaces/logger/ILogger';
+import { IMeta } from '../../../application/interfaces/clients/IMeta';
 import { IRpcClient } from '../../../application/interfaces/clients/IRpcClient';
 import { InternalServerErrorException } from '../../../application/exceptions/InternalServerErrorException';
 import { LoggerPino } from '../../logger_pino/LoggerPino';
@@ -30,8 +31,9 @@ export class RpcHttpClient extends ClientProxy implements IRpcClient {
     >(
         method: string,
         data: TInput,
+        meta: IMeta = {},
     ): Promise<TResult> {
-        return firstValueFrom(this.send<TResult, TInput>(method, data));
+        return firstValueFrom(this.send<TResult, { data: TInput, meta: IMeta }>(method, { data, meta }));
     }
 
     /**
@@ -55,10 +57,14 @@ export class RpcHttpClient extends ClientProxy implements IRpcClient {
         packet: ReadPacket<any>,
         callback: (packet: WritePacket<any>) => void,
     ): () => void {
-        const { pattern: method, data } = packet;
+        const { pattern: method, data: { data, meta } } = packet;
         axios({
             method: 'post',
             url: `${URL}/rpc/${method}`,
+            headers: {
+                ...meta.chatId ? { 'X-Chat-Id': meta.chatId } : {},
+                ...meta.traceId ? { 'X-Trace-Id': meta.traceId } : {},
+            },
             data,
         }).then(responce => {
             callback({ response: responce.data });

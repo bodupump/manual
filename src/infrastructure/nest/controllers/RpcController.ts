@@ -1,6 +1,7 @@
 import { Controller, Inject } from '@nestjs/common';
 import { ILogger } from '../../../application/interfaces/logger/ILogger';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { IMeta } from '../../../application/interfaces/clients/IMeta';
+import { Ctx, MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class RpcController {
@@ -12,7 +13,8 @@ export class RpcController {
      *
      */
     @MessagePattern('echo')
-    async echo(@Payload() data: object) {
+    async echo(@Payload() data: object, @Ctx() meta: IMeta) {
+        console.log({ meta });
         return data;
     }
 }
